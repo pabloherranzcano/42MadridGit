@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmedina- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/08 11:50:28 by pmedina-          #+#    #+#             */
-/*   Updated: 2020/07/14 12:48:50 by pmedina-         ###   ########.fr       */
+/*   Created: 2020/07/17 13:14:56 by pherranz          #+#    #+#             */
+/*   Updated: 2020/11/05 18:44:57 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,18 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*frase;
+	char	*dst;
 	size_t	i;
-	size_t	st;
 
+	if (!s || !(dst = malloc(sizeof(char) * (len + 1))))
+		return (NULL);
 	i = 0;
-	st = (size_t)start;
-	if (!s)
-		return (NULL);
-	if (*s == '\0' || st > ft_strlen(s))
-		return (ft_strdup(""));
-	if (!(frase = (char *)malloc(sizeof(char) * (len + 1))))
-		return (NULL);
-	while (i < len)
+	while (i < len && start <= ft_strlen(s))
 	{
-		frase[i] = s[st];
+		dst[i] = s[start];
 		i++;
-		st++;
+		start++;
 	}
-	frase[i] = '\0';
-	return (frase);
+	dst[i] = '\0';
+	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 12:03:20 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/12 18:27:55 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/14 18:08:55 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,12 @@ void	guessflags(t_printf *j)
 			j->width = (num * -1);
 			j->tab = '-';
 		}
+		j->width = num;
 	}
 	if (ft_isdigit(*j->str) && *j->str != 0 && j->dot != '.' && j->width == 0)
+	{	
 		j->width = ft_atoi(j->str);
+	}
 	flagdot(j);
 }
 

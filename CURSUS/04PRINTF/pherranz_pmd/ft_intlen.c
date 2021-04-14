@@ -1,22 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   intlen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmedina- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/21 11:49:30 by pmedina-          #+#    #+#             */
-/*   Updated: 2020/07/21 11:55:29 by pmedina-         ###   ########.fr       */
+/*   Created: 2020/10/19 13:55:08 by pmedina-          #+#    #+#             */
+/*   Updated: 2021/04/14 18:18:11 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-t_list	*ft_lstlast(t_list *lst)
+size_t	ft_intlen(long num)
 {
-	if (lst == NULL)
-		return (NULL);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
+	size_t	c;
+
+	c = 0;
+	if (num == 0)
+	{
+		return (1);
+	}
+	if (num < 0)
+	{
+		num *= -1;
+		c++;
+	}
+	while (num > 0)
+	{
+		num = num / 10;
+		c++;
+	}
+	return (c);
 }

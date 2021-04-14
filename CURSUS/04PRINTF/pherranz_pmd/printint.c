@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 12:26:06 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/11 12:00:19 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/14 19:27:22 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	writeint(t_printf *j, int zero, int space, int num)
 	char	*numstr;
 
 	numstr = ft_itoa(num);
-	len = intlen(num);
+	len = ft_intlen(num);
 	signo = 0;
 	if (num < 0 && space > j->precision && j->zero_space == '0' && numstr++)
 		signo = printsign(signo);
@@ -69,9 +69,9 @@ void	printint(t_printf *j, int num)
 	int		space;
 	int		len;
 
-	len = intlen(num);
+	len = ft_intlen(num);
 	j->lenstr += len;
-	if (j->precision == -1)
+	if (j->precision < 0)
 	{
 		j->width = len;
 		j->precision = len;
@@ -80,9 +80,9 @@ void	printint(t_printf *j, int num)
 	if (j->precision <= len)
 		space = j->width - len;
 	if (num < 0 && j->precision >= len)
-		space -= 1;
+		space--;
 	if (num == 0 && j->precision == 0 && j->dot == '.')
-		space += 1;
+		space++;
 	zero = (j->precision - len);
 	if (num < 0 && j->precision >= 0)
 		zero = (j->precision - len + 1);

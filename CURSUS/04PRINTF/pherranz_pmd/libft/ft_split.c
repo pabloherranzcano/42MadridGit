@@ -3,46 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmedina- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/13 12:56:43 by pmedina-          #+#    #+#             */
-/*   Updated: 2020/07/21 11:14:51 by pmedina-         ###   ########.fr       */
+/*   Created: 2020/07/23 11:30:41 by pherranz          #+#    #+#             */
+/*   Updated: 2020/11/05 18:39:20 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	str_count(const char *s, char c)
+static int	ft_wordcounter(const char *s, char c)
 {
 	int		i;
-	int		cs;
+	int		count;
 
 	i = 0;
-	cs = 0;
-	if (s[i] == c)
-		cs--;
-	while (s[i] != '\0')
+	count = 0;
+	while (s[i])
 	{
-		if ((s[i] == c && s[i + 1] != c) || s[i + 1] == '\0')
-			cs++;
-		i++;
+		while (s[i] == c)
+			i++;
+		if (s[i] != c && s[i] != 0)
+			count++;
+		while (s[i] != c && s[i] != 0)
+			i++;
 	}
-	cs++;
-	return (cs);
+	return (count);
 }
 
-static char	*ms(const char *s, char c)
+static char	*ft_strmalloc(const char *s, char c)
 {
 	char	*string;
 	int		i;
 
 	i = 0;
-	while (s[i] != c && s[i])
+	while (s[i] && s[i] != c)
 		i++;
 	if (!(string = (char *)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
 	i = 0;
-	while (s[i] != c && s[i])
+	while (s[i] && s[i] != c)
 	{
 		string[i] = s[i];
 		i++;
@@ -54,27 +54,28 @@ static char	*ms(const char *s, char c)
 char		**ft_split(char const *s, char c)
 {
 	char	**tabla;
-	int		ns;
+	int		num_w;
 	int		i;
 
-	i = 0;
 	if (!s)
 		return (NULL);
-	ns = str_count(s, c);
-	if (!(tabla = (char **)malloc(sizeof(char *) * (ns + 1))))
+	i = -1;
+	num_w = ft_wordcounter(s, c);
+	if (!(tabla = malloc(sizeof(char **) * (num_w + 1))))
 		return (NULL);
-	while (*s)
+	while (++i < num_w)
 	{
-		while (*s && *s == c)
+		while (*s == c)
 			s++;
-		if (*s && *s != c)
+		if (!(tabla[i] = ft_strmalloc(s, c)))
 		{
-			tabla[i] = ms(s, c);
-			i++;
-			while (*s && *s != c)
-				s++;
+			while (i > 0)
+				free(tabla[i--]);
+			free(tabla);
+			return (0);
 		}
+		s += ft_strlen(tabla[i]);
 	}
-	tabla[i] = NULL;
+	tabla[i] = 0;
 	return (tabla);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmedina- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/27 11:21:16 by pmedina-          #+#    #+#             */
-/*   Updated: 2020/07/27 11:37:25 by pmedina-         ###   ########.fr       */
+/*   Created: 2020/10/21 21:42:33 by pherranz          #+#    #+#             */
+/*   Updated: 2020/11/01 18:54:35 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*lista;
-	t_list	*e;
+	t_list *new_list;
+	t_list *aux;
 
-	if (!f || !lst)
+	if (!lst || !f)
 		return (NULL);
-	lista = NULL;
+	new_list = NULL;
 	while (lst)
 	{
-		if (!(e = ft_lstnew(f(lst->content))))
-		{
-			ft_lstclear(&lista, del);
-		}
-		ft_lstadd_back(&lista, e);
+		aux = ft_lstnew(f(lst->content));
+		if (aux == NULL)
+			ft_lstclear(&new_list, del);
+		ft_lstadd_back(&new_list, aux);
 		lst = lst->next;
 	}
-	return (lista);
+	return (new_list);
 }

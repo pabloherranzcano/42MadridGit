@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/19 13:31:45 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/06 19:58:27 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/14 18:28:36 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	printuns(t_printf *j, unsigned int num)
 	int			zero;
 	int			len;
 
-	len = intlen(num);
+	len = ft_intlen(num);
 	space = j->width - j->precision;
 	if (j->precision < 0)
 		j->precision = len;
 	if (j->precision <= len)
 		space = j->width - len;
 	if (num == 0 && j->precision == 0 && j->dot == '.')
-		space += 1;
+		space++;
 	if (num < 0 && j->precision >= len)
-		space -= 1;
+		space--;
 	if (j->precision > len)
 		zero = j->precision - len;
 	while (space-- > 0 && j->tab != '-')

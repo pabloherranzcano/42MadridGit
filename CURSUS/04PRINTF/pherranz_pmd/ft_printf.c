@@ -6,11 +6,17 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:55:33 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/12 18:19:38 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/14 17:48:11 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+/*
+** Función para comprobar el tipo (la letra después del %)
+** para saber qué tenmos que imprimir. Vamos derivando
+** el flujo a una función u otra dependiendo de qué tipo sea.
+*/
 
 void	guesstype(t_printf *j)
 {
@@ -32,6 +38,17 @@ void	guesstype(t_printf *j)
 		printchar(j, '%');
 }
 
+/*
+** Función para recorrer el string:
+**	- Inciaizamos la variable lenstr (lo que retorna printf).
+**	- Recorremos el array
+**	- Si no es %, imprimimos el char (sumando 1 a lenstr).
+**	- Si es %, inicializamos la estrcuctura y averiguamos de qué
+**	  tipo es lo que vamos a imprimir después.
+**	- En caso de que el char después de % no coincida con ningún tipo,
+**	  avanzamos en la cadena y vuelta a empezar.
+*/
+
 void	recorrestr(t_printf *j)
 {
 	j->lenstr = 0;
@@ -52,8 +69,15 @@ void	recorrestr(t_printf *j)
 		}
 		j->str++;
 	}
-	va_end(j->args);
 }
+
+/*
+** Función para iniciar printf:
+**	- Iniciamos la MACRO con los argumentos.
+**	- Recorremos el array
+**	- Finalizamos la MACRO.
+**	- Retornamos la longitud del primer argumento (s).
+*/
 
 int	ft_printf(const char *s, ...)
 {

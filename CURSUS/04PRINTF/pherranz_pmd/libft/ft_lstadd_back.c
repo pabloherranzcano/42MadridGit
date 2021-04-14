@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   intlen.c                                           :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/19 13:55:08 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/12 18:32:54 by pherranz         ###   ########.fr       */
+/*   Created: 2020/10/21 21:40:53 by pherranz          #+#    #+#             */
+/*   Updated: 2020/10/30 11:03:30 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "libft.h"
 
-size_t	intlen(long num)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	size_t	c;
+	t_list	*current;
 
-	c = 0;
-	if (num == 0)
+	if (lst && new)
 	{
-		return (1);
+		current = *lst;
+		if (*lst == NULL)
+			*lst = new;
+		else
+		{
+			while (current->next)
+				current = current->next;
+			current->next = new;
+			current->next->next = NULL;
+		}
 	}
-	if (num < 0)
-	{
-		num *= -1;
-		c++;
-	}
-	while (num > 0)
-	{
-		num = num / 10;
-		c++;
-	}
-	return (c);
 }

@@ -3,62 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmedina- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/13 10:03:17 by pmedina-          #+#    #+#             */
-/*   Updated: 2020/11/13 13:05:21 by pmedina-         ###   ########.fr       */
+/*   Created: 2020/10/01 15:31:14 by pherranz          #+#    #+#             */
+/*   Updated: 2020/11/05 16:52:32 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "libft.h"
 
-static size_t		largo(long num)
+static size_t	ft_intcounter(long x)
 {
-	size_t				largo;
+	size_t	c;
 
-	largo = 0;
-	if (num == 0)
+	c = 0;
+	if (x < 0)
+		x = x * 10;
+	if (x == 0)
+		c = 1;
+	while (x != 0)
 	{
-		largo++;
-		return (largo);
+		x = x / 10;
+		c++;
 	}
-	if (num < 0)
+	return (c);
+}
+
+char			*ft_itoa(int n)
+{
+	size_t	len;
+	long	num;
+	char	*dst;
+
+	num = n;
+	len = ft_intcounter(num);
+	if (!(dst = (char *)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	dst[len--] = 0;
+	if (n == 0)
+		dst[0] = '0';
+	if (n < 0)
 	{
-		num = num * -1;
-		largo++;
+		dst[0] = '-';
+		num = -num;
 	}
 	while (num > 0)
 	{
+		dst[len] = (num % 10) + '0';
 		num = num / 10;
-		largo++;
-	}
-	return (largo);
-}
-
-char				*ft_itoa(int n)
-{
-	size_t			len;
-	long			nu;
-	char			*s;
-
-	nu = n;
-	len = largo(nu);
-	if (!(s = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	s[len--] = '\0';
-	if (n == 0)
-		s[0] = '0';
-	if (nu < 0)
-	{
-		s[0] = '-';
-		nu = nu * -1;
-	}
-	while (nu > 0)
-	{
-		s[len] = (nu % 10) + '0';
-		nu = nu / 10;
 		len--;
 	}
-	return (s);
+	return (dst);
 }

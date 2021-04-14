@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/16 12:54:07 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/12 19:25:49 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/14 16:53:45 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ void	printchar(t_printf *j, int c)
 		zero = (j->width - 1);
 	while (zero-- > 0 && j->tab != '-')
 	{
+		if (space != 0)
+			space = 0;
 		j->lenstr += write(1, "0", 1);
-		space = 0;
 	}
 	while (space-- > 0 && j->tab != '-')
 		j->lenstr += write(1, " ", 1);

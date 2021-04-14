@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/05 16:48:37 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/10 17:47:17 by pherranz         ###   ########.fr       */
+/*   Created: 2021/03/06 14:48:50 by ltejedor          #+#    #+#             */
+/*   Updated: 2021/04/14 18:56:39 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	treat_spec(va_list args, int *len, t_flags fl)
+static void		treat_spec(va_list args, int *len, t_flags fl)
 {
 	if (fl.spe_c == '%')
 		print_spec_pct(len, fl);
@@ -23,7 +23,7 @@ static void	treat_spec(va_list args, int *len, t_flags fl)
 	if (fl.spe_c == 'p')
 		print_spec_p(len, fl, va_arg(args, unsigned long int));
 	if (fl.spe_c == 'i' || fl.spe_c == 'd' || fl.spe_c == 'u')
-		print_spec_idu(len, fl, args);
+		print_spec_i_d_u(len, fl, args);
 	if (fl.spe_c == 'x' || fl.spe_c == 'X')
 		print_spec_x(len, fl, args);
 }
@@ -36,10 +36,8 @@ static t_flags	treat_star(va_list args, t_flags fl, int *j)
 	value = va_arg(args, int);
 	if (fl.point == 0)
 	{
-		if (value >= 0)
-			fl.width = value;
-		else
-			fl.width = -value;
+		fl.width = (value >= 0) ? value : -value;
+		fl.minus = (value >= 0) ? fl.minus : 1;
 	}
 	if (fl.point == 1)
 	{
@@ -77,7 +75,7 @@ static t_flags	treat_flags(va_list args, t_flags fl)
 	return (fl);
 }
 
-static void	get_fspecs(va_list args, const char *s, int *len)
+static void		get_fspecs(va_list args, const char *s, int *lens)
 {
 	t_flags	fl;
 	int		j;
@@ -96,30 +94,28 @@ static void	get_fspecs(va_list args, const char *s, int *len)
 		fl.precision = 0;
 		fl.pad_c = ' ';
 		fl = treat_flags(args, fl);
-		treat_spec(args, len, fl);
+		treat_spec(args, lens, fl);
 	}
 }
 
-int	ft_printf(const char *s, ...)
+int				ft_printf(const char *str, ...)
 {
 	va_list	args;
-	int		len;
+	int		lenS;
 
 	va_start(args, s);
-	len = 0;
-	while (*s)
+	lenS = 0;
+
+	while (*s != '\0')
 	{
 		if (*s != '%')
-		{
-			len += write(1, &s, 1);
-			*s++;
-		}
+			lenS += write(1, &s, 1);
 		else
 		{
-			*s++;
-			get_fspecs(args, s, &len,);
+			s++;
+			get_fspecs(args, s, &lenS);
 		}
 	}
 	va_end(args);
-	return (len);
+	return (lenS);
 }
