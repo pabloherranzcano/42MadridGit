@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 14:02:01 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/06 20:07:17 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:19:55 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	printhexu(t_printf *j, unsigned int x)
 	int		zero;
 	int		len;
 
-	len = hxlen(x);
+	len = ft_hxlen(x);
 	zero = 0;
 	if (j->precision < 0)
 		j->precision = len;

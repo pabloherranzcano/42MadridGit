@@ -1,4 +1,4 @@
-SRCS	= ft_printf.c initstruct.c printint.c printuns.c printchar.c printstring.c intlen.c printhx.c printhexu.c printdir.c hxlen.c
+SRCS	= ft_printf.c initstruct.c printint.c printuns.c printchar.c printstring.c printhx.c printhexu.c printdir.c ft_hxlen.c ft_intlen.c 
 
 OBJS	= ${SRCS:.c=.o}
 

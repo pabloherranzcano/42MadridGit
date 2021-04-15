@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/23 14:22:14 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/06 20:02:48 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:20:23 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	printdir(t_printf *j, unsigned long dp)
 	int		len;
 
 	zero = 0;
-	len = hxlen(dp) + 2;
+	len = ft_hxlen(dp) + 2;
 	if (j->precision < 0)
 		j->precision = len;
 	space = j->precision;

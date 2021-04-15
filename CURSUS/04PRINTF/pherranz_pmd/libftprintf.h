@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:16:23 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/14 18:18:53 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:23:27 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "libft/libft.h"
 # include <stdarg.h>
 
-typedef struct s_printf
+typedef struct	s_printf
 {
 	char		*str;
 	char		tab;
@@ -34,10 +34,10 @@ void			printchar(t_printf *j, int c);
 void			printstring(t_printf *j, char *str);
 void			printint(t_printf *j, int num);
 void			printuns(t_printf *j, unsigned int num);
-size_t			ft_intlen(long num);
 void			printhx(t_printf *j, unsigned int x);
 void			printhexu(t_printf *j, unsigned int x);
 void			printdir(t_printf *j, unsigned long dp);
-int				hxlen(unsigned long nb);
+int				ft_hxlen(unsigned long nb);
+size_t			ft_intlen(long num);
 
 #endif

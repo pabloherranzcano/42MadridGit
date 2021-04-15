@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 12:26:06 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/14 19:27:22 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/15 17:52:34 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	printint(t_printf *j, int num)
 
 	len = ft_intlen(num);
 	j->lenstr += len;
-	if (j->precision < 0)
+	if (j->precision == -1)
 	{
 		j->width = len;
 		j->precision = len;
