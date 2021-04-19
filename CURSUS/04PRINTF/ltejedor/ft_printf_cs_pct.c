@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_cs_pct.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ltejedor <ltejedor@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:41:58 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/05 16:51:08 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/03/17 15:43:55 by ltejedor         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	print_relleno(int *len, t_flags fl)
 	}
 }
 
-void	print_spec_pct(int *len, t_flags fl)
+void		print_spec_pct(int *len, t_flags fl)
 {
 	fl.precision = 1;
 	if (fl.minus == 0)
@@ -34,7 +34,7 @@ void	print_spec_pct(int *len, t_flags fl)
 	}
 }
 
-void	print_spec_c(int *len, t_flags fl, char c)
+void		print_spec_c(int *len, t_flags fl, char c)
 {
 	fl.pad_c = ' ';
 	fl.precision = 1;
@@ -45,7 +45,7 @@ void	print_spec_c(int *len, t_flags fl, char c)
 		print_relleno(len, fl);
 }
 
-void	print_spec_s(int *len, t_flags fl, char *s)
+void		print_spec_s(int *len, t_flags fl, char *s)
 {
 	if (s == NULL)
 		s = "(null)";

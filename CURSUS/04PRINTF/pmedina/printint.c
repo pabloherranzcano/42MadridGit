@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/06 12:26:06 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/11 11:28:42 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/16 19:28:15 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	writeint(t_printf *j, int zero, int space, int num)
 		j->lenstr--;
 		free((num >= 0) ? (numstr) : (--numstr));
 }
-
+	
 void		printint(t_printf *j, int num)
 {
 	int		zero;

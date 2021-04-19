@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:48:50 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/14 18:56:39 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 17:48:53 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,11 @@ static t_flags	treat_star(va_list args, t_flags fl, int *j)
 	value = va_arg(args, int);
 	if (fl.point == 0)
 	{
-		fl.width = (value >= 0) ? value : -value;
-		fl.minus = (value >= 0) ? fl.minus : 1;
+		fl.width = value;
+		if (value <= 0)
+			fl.width = -value;
+		if (value <= 0)
+			fl.minus = 1;
 	}
 	if (fl.point == 1)
 	{
@@ -75,18 +78,18 @@ static t_flags	treat_flags(va_list args, t_flags fl)
 	return (fl);
 }
 
-static void		get_fspecs(va_list args, const char *s, int *lens)
+static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 {
 	t_flags	fl;
 	int		j;
 
 	j = 0;
-	while (ft_strchr_01(ALL_FL, s[*i]))
-		fl.set[j++] = s[(*i)++];
+	while (ft_strchr_01(ALL_FL, format[*i]))
+		fl.set[j++] = format[(*i)++];
 	fl.set[j] = '\0';
-	if (ft_strchr_01(FSPECS, s[*i]))
+	if (ft_strchr_01(FSPECS, format[*i]))
 	{
-		fl.spe_c = s[(*i)++];
+		fl.spe_c = format[(*i)++];
 		fl.minus = ft_strchr_01(fl.set, '-');
 		fl.space = ft_strchr_01(fl.set, ' ');
 		fl.width = 0;
@@ -94,28 +97,29 @@ static void		get_fspecs(va_list args, const char *s, int *lens)
 		fl.precision = 0;
 		fl.pad_c = ' ';
 		fl = treat_flags(args, fl);
-		treat_spec(args, lens, fl);
+		treat_spec(args, len, fl);
 	}
 }
 
-int				ft_printf(const char *str, ...)
+int				ft_printf(const char *format, ...)
 {
 	va_list	args;
-	int		lenS;
+	int		len;
+	int		i;
 
-	va_start(args, s);
-	lenS = 0;
-
-	while (*s != '\0')
+	va_start(args, format);
+	len = 0;
+	i = 0;
+	while (format[i] != '\0')
 	{
-		if (*s != '%')
-			lenS += write(1, &s, 1);
+		if (format[i] != '%')
+			len += write(1, &format[i++], 1);
 		else
 		{
-			s++;
-			get_fspecs(args, s, &lenS);
+			i++;
+			get_fspecs(args, format, &len, &i);
 		}
 	}
 	va_end(args);
-	return (lenS);
+	return (len);
 }

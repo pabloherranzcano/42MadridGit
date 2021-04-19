@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/25 18:25:17 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/05 16:50:11 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:06:45 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_flags
 	unsigned long long int	nu2;
 	long long int			nu;
 	char					*a;
+	char					*str;
 	size_t					strlen;
 }				t_flags;
 

@@ -6,31 +6,31 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:41:58 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/19 16:40:01 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:11:05 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	print_relleno(int *len, t_flags fl)
+static void	print_relleno(t_printf *h)
 {
-	while (fl.width > fl.precision)
+	while (*h->width > *h->precision)
 	{
-	*len += write(1, &fl.pad_c, 1);
-		fl.width--;
+		*len += write(1, &h->pad_c, 1);
+		*h->width--;
 	}
 }
 
-void		print_spec_pct(int *len, t_flags fl)
+void		print_spec_pct(t_printf *h)
 {
-	fl.precision = 1;
-	if (fl.minus == 0)
-		print_relleno(len, fl);
+	*h->precision = 1;
+	if (*h->minus == 0)
+		print_relleno(&h);
 	*len += write(1, "%", 1);
-	if (fl.minus == 1)
+	if (*h->minus == 1)
 	{
-		fl.pad_c = ' ';
-		print_relleno(len, fl);
+		*h->pad_c = ' ';
+		print_relleno(&h);
 	}
 }
 

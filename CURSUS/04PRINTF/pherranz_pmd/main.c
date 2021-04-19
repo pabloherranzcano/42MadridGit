@@ -33,5 +33,4 @@ int	main(void)
 	printf("%.d\n", 24);
 
 	printf("-------------- END --------------\n");
-
 }
