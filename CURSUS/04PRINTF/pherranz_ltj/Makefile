@@ -6,11 +6,9 @@
 #    By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/19 19:26:09 by pherranz          #+#    #+#              #
-#    Updated: 2021/04/19 19:26:09 by pherranz         ###   ########.fr        #
+#    Updated: 2021/04/19 19:26:39 by pherranz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
-
 
 CC		= gcc
 CFLAGS	= -Wall -Wextra -Werror
