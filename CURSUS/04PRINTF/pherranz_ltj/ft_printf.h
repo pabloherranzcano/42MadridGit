@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/02/25 18:25:17 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/19 16:26:44 by pherranz         ###   ########.fr       */
+/*   Created: 2021/04/19 19:25:58 by pherranz          #+#    #+#             */
+/*   Updated: 2021/04/19 19:26:03 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <stdarg.h>
 # include <stdint.h>
 # include <stdio.h>
-# define FLAGS		"-0 "
-# define ALL_FL		"-0 *.0123456789"
+# define FLAGS		"-0"
+# define ALL_FL		"-0*.0123456789"
 # define FSPECS		"cspdiuxX%"
 # define DIGITS		"0123456789"
 # define HEXALOW	"0123456789abcdef"
@@ -27,7 +27,7 @@
 
 typedef struct	s_flags
 {
-	char					set[15];
+	char					set[14];
 	char					spe_c;
 	char					pad_c;
 	char					minus;
@@ -41,6 +41,15 @@ typedef struct	s_flags
 	char					*a;
 	size_t					strlen;
 }				t_flags;
+
+typedef struct	s_ullitoa
+{
+	char					*a;
+	unsigned long long int	nbr;
+	size_t					size;
+	int						b_len;
+}				t_ullitoa;
+
 
 int				ft_printf(const char *str, ...);
 void			print_spec_c(int *len, t_flags fl, char c);
