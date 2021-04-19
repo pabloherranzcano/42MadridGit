@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_pidux.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ltejedor <ltejedor@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:44:01 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/03/17 16:21:33 by ltejedor         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:05:35 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,14 @@ void	print_spec_i_d_u(int *len, t_flags fl, va_list args)
 	if (fl.spe_c == 'i' || fl.spe_c == 'd')
 	{
 		fl.nu = va_arg(args, int);
-		fl.sign = (fl.nu >= 0) ? 0 : '-';
-		fl.nu2 = (fl.nu >= 0) ? fl.nu : -fl.nu;
+		if (fl.nu >= 0)
+			fl.sign = 0;
+		else
+			fl.sign = '-';
+		if (fl.nu >= 0)
+			fl.nu2 = fl.nu;
+		else
+			fl.nu2 = -fl.nu;
 	}
 	if (fl.spe_c == 'u')
 	{

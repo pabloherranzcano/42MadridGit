@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:41:58 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/19 18:11:05 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:45:55 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,29 +34,29 @@ void		print_spec_pct(t_printf *h)
 	}
 }
 
-void		print_spec_c(int *len, t_flags fl, char c)
+void		print_spec_c((t_printf *h, char c)
 {
-	fl.pad_c = ' ';
-	fl.precision = 1;
-	if (fl.minus == 0)
+	*h->pad_c = ' ';
+	*h->precision = 1;
+	if (*h->minus == 0)
 		print_relleno(len, fl);
 	*len += write(1, &c, 1);
-	if (fl.minus == 1)
+	if (*h->minus == 1)
 		print_relleno(len, fl);
 }
 
-void		print_spec_s(int *len, t_flags fl, char *s)
+void		print_spec_s(t_printf **h, char *s)
 {
 	if (s == NULL)
 		s = "(null)";
-	if ((fl.point == 1 && fl.precision > (int)ft_strlen(s)) || fl.point == 0)
-		fl.precision = ft_strlen(s);
-	if (fl.minus == 0)
+	if ((*h->point == 1 && *h->precision > (int)ft_strlen(s)) || *h->point == 0)
+		*h->precision = ft_strlen(s);
+	if (*h->minus == 0)
 		print_relleno(len, fl);
-	ft_putcstr_len(s, len, fl.precision);
-	if (fl.minus == 1)
+	ft_putcstr_len(s, len, *h->precision);
+	if (*h->minus == 1)
 	{
-		fl.pad_c = ' ';
+		*h->pad_c = ' ';
 		print_relleno(len, fl);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:48:50 by ltehedor          #+#    #+#             */
-/*   Updated: 2021/04/19 18:13:00 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:45:16 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static void	treat_spec(t_printf *h)
 	if (*h->spe_c == '%')
 		print_spec_pct(&h);
 	if (*h->spe_c == 'c')
-		print_spec_c(&h, va_arg(args, int));
+		print_spec_c(&h, va_arg(*h->args, int));
 	if (*h->spe_c == 's')
-		print_spec_s(&h, va_arg(args, char *));
+		print_spec_s(&h, va_arg(*h->args, char *));
 	if (*h->spe_c == 'p')
-		print_spec_p(&h, va_arg(args, unsigned long int));
+		print_spec_p(&h, va_arg(*h->args, unsigned long int));
 	if (*h->spe_c == 'i' || *h->spe_c == 'd' || *h->spe_c == 'u')
 		print_spec_i_d_u(&h);
 	if (*h->spe_c == 'x' || *h->spe_c == 'X')

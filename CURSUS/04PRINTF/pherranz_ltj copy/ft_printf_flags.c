@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:43:18 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/19 16:38:57 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 18:44:28 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 static void	print_width(int *len, t_flags fl)
 {
-	if (fl.sign == '-' || fl.space == 1)
-		fl.width--;
-	if (fl.precision <= (int)fl.strlen)
-		fl.precision = (int)fl.strlen;
-	if (fl.pad_c == '0' && fl.minus == 1)
-		fl.pad_c = ' ';
-	while (fl.width > fl.precision)
+	if (*h->sign == '-' || *h->space == 1)
+		*h->width--;
+	if (*h->precision <= (int)*h->strlen)
+		*h->precision = (int)*h->strlen;
+	if (*h->pad_c == '0' && *h->minus == 1)
+		*h->pad_c = ' ';
+	while (*h->width > *h->precision)
 	{
-		*len += write(1, &fl.pad_c, 1);
-		fl.width--;
+		*len += write(1, &*h->pad_c, 1);
+		*h->width--;
 	}
 }
 
@@ -31,36 +31,36 @@ static void	print_zeros(int *len, t_flags fl)
 {
 	int		j;
 
-	if (fl.spe_c == 'p')
+	if (*h->spe_c == 'p')
 		ft_putcstr_len("0x", len, 2);
-	if (fl.minus == 0 && fl.pad_c == '0')
+	if (*h->minus == 0 && *h->pad_c == '0')
 		print_width(len, fl);
-	if (fl.point == 1)
+	if (*h->point == 1)
 	{
-		j = fl.precision;
-		while (j-- > (int)fl.strlen)
+		j = *h->precision;
+		while (j-- > (int)*h->strlen)
 			*len += write(1, "0", 1);
 	}
 }
 
-void		print_flags(int *len, t_flags fl)
+void		print_flags(t_printf *h)
 {
-	fl.strlen = ft_strlen(fl.a);
-	if (fl.nu2 == 0 && fl.point == 1 && fl.precision == 0)
-		fl.width++;
-	if (fl.spe_c == 'p')
-		fl.width -= 2;
-	if (fl.point == 1)
-		fl.pad_c = ' ';
-	if (fl.minus == 0 && fl.pad_c == ' ')
+	*h->strlen = ft_strlen(*h->a);
+	if (*h->nu2 == 0 && *h->point == 1 && *h->precision == 0)
+		*h->width++;
+	if (*h->spe_c == 'p')
+		*h->width -= 2;
+	if (*h->point == 1)
+		*h->pad_c = ' ';
+	if (*h->minus == 0 && *h->pad_c == ' ')
 		print_width(len, fl);
-	if (fl.sign == '-')
-		*len += write(1, &fl.sign, 1);
-	if (fl.space == 1)
+	if (*h->sign == '-')
+		*len += write(1, &*h->sign, 1);
+	if (*h->space == 1)
 		*len += write(1, " ", 1);
 	print_zeros(len, fl);
-	if (!(fl.nu2 == 0 && fl.point == 1 && fl.precision == 0))
-		ft_putcstr_len(fl.a, len, ft_strlen(fl.a));
-	if (fl.minus == 1)
+	if (!(*h->nu2 == 0 && *h->point == 1 && *h->precision == 0))
+		ft_putcstr_len(*h->a, len, ft_strlen(*h->a));
+	if (*h->minus == 1)
 		print_width(len, fl);
 }

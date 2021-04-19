@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:43:18 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/19 16:38:57 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:04:17 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	print_zeros(int *len, t_flags fl)
 	}
 }
 
-void		print_flags(int *len, t_flags fl)
+void	print_flags(int *len, t_flags fl)
 {
 	fl.strlen = ft_strlen(fl.a);
 	if (fl.nu2 == 0 && fl.point == 1 && fl.precision == 0)

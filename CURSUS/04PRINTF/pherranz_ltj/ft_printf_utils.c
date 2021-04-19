@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/12 16:23:31 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/19 16:41:07 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:09:55 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(const char *s)
 {
-	size_t l;
+	size_t	l;
 
 	if (!s)
 		return (0);
@@ -24,9 +24,9 @@ size_t	ft_strlen(const char *s)
 	return (l);
 }
 
-int		ft_strchr_01(char *s, char c)
+int	ft_strchr_01(char *s, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -39,7 +39,7 @@ int		ft_strchr_01(char *s, char c)
 
 void	ft_putcstr_len(char *s, int *len, int size)
 {
-	int i;
+	int	i;
 
 	if (s != NULL)
 	{
@@ -49,7 +49,7 @@ void	ft_putcstr_len(char *s, int *len, int size)
 	}
 }
 
-char		*ft_ullitoa_base(unsigned long long int n, char *base)
+char	*ft_ullitoa_base(unsigned long long int n, char *base)
 {
 	char					*a;
 	unsigned long long int	nbr;
@@ -59,9 +59,14 @@ char		*ft_ullitoa_base(unsigned long long int n, char *base)
 	b_len = ft_strlen(base);
 	nbr = n;
 	size = 1;
-	while (n /= b_len)
+	n /= b_len;
+	while (n)
+	{
 		size++;
-	if (!(a = (char *)malloc(size + 1)))
+		n /= b_len;
+	}
+	a = (char *)malloc(size + 1);
+	if (!a)
 		return (0);
 	a[size--] = '\0';
 	while (nbr > 0)

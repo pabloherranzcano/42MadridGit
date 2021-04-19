@@ -6,13 +6,13 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:48:50 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/19 17:48:53 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:02:29 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void		treat_spec(va_list args, int *len, t_flags fl)
+static void	treat_spec(va_list args, int *len, t_flags fl)
 {
 	if (fl.spe_c == '%')
 		print_spec_pct(len, fl);
@@ -78,7 +78,7 @@ static t_flags	treat_flags(va_list args, t_flags fl)
 	return (fl);
 }
 
-static void		get_fspecs(va_list args, const char *format, int *len, int *i)
+static void	get_fspecs(va_list args, const char *format, int *len, int *i)
 {
 	t_flags	fl;
 	int		j;
@@ -101,7 +101,7 @@ static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 	}
 }
 
-int				ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	va_list	args;
 	int		len;

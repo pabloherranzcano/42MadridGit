@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:41:58 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/19 16:40:01 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/19 19:04:07 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void	print_relleno(int *len, t_flags fl)
 {
 	while (fl.width > fl.precision)
 	{
-	*len += write(1, &fl.pad_c, 1);
+		*len += write(1, &fl.pad_c, 1);
 		fl.width--;
 	}
 }
 
-void		print_spec_pct(int *len, t_flags fl)
+void	print_spec_pct(int *len, t_flags fl)
 {
 	fl.precision = 1;
 	if (fl.minus == 0)
@@ -34,7 +34,7 @@ void		print_spec_pct(int *len, t_flags fl)
 	}
 }
 
-void		print_spec_c(int *len, t_flags fl, char c)
+void	print_spec_c(int *len, t_flags fl, char c)
 {
 	fl.pad_c = ' ';
 	fl.precision = 1;
@@ -45,7 +45,7 @@ void		print_spec_c(int *len, t_flags fl, char c)
 		print_relleno(len, fl);
 }
 
-void		print_spec_s(int *len, t_flags fl, char *s)
+void	print_spec_s(int *len, t_flags fl, char *s)
 {
 	if (s == NULL)
 		s = "(null)";
