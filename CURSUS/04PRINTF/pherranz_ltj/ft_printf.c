@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:24 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/21 19:01:45 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/21 19:32:28 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	treat_star(t_printf *st)
 {
 	int	value;
 
-	st->str++;
+	st->setAux++;
 	value = va_arg(st->args, int);
 	if (st->point == 0)
 	{
@@ -64,24 +64,31 @@ static void	treat_flags(t_printf *st)
 	if (*st->setAux == '*')
 		treat_star(st);
 	while (*st->setAux != '\0' && ft_strchr_01(DIGITS, *st->setAux))
+	{
 		st->width = 10 * st->width + *st->setAux - '0';
+		st->setAux++;
+	}
 	if (*st->setAux == '.')
 	{
 		st->point = 1;
-		if (++*st->set == '*')
+		st->set++;
+		if (*st->set == '*')
 			treat_star(st);
 		while (*st->setAux != '\0' && ft_strchr_01(DIGITS, *st->setAux))
+		{
 			st->precision = 10 * st->precision + *st->setAux - '0';
+			st->setAux++;
+		}
 	}
 }
 
 static void	initstruct(t_printf *st)
 {
+	st->setAux = st->set;
 	while (ft_strchr_01(ALL_FLAGS, *st->str))
 		*st->set++ = *st->str++;
 	*st->set = '\0';
-	st->setAux = st->set;
-	if (ft_strchr_01(CONVERSIONS, *st->str++))
+	if (ft_strchr_01(CONVERSIONS, *st->str))
 	{
 		st->spe_c = *st->str++;
 		st->minus = ft_strchr_01(st->set, '-');
