@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:42 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/19 19:25:43 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:58:58 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,43 @@
 
 #include "ft_printf.h"
 
-void	print_spec_p(int *len, t_flags fl, unsigned long int p)
+void	print_spec_p(t_printf *st, unsigned long int p)
 {
-	fl.a = ft_ullitoa_base(p, HEXALOW);
-	print_flags(len, fl);
-	free(fl.a);
+	st->a = ft_ullitoa_base(p, HEXALOW);
+	print_flags(st);
+	free(st->a);
 }
 
-void	print_spec_i_d_u(int *len, t_flags fl, va_list args)
+void	print_spec_i_d_u(t_printf *st)
 {
-	if (fl.spe_c == 'i' || fl.spe_c == 'd')
+	if (st->spe_c == 'i' || st->spe_c == 'd')
 	{
-		fl.nu = va_arg(args, int);
-		if (fl.nu >= 0)
-			fl.sign = 0;
+		st->nu = va_arg(st->args, int);
+		if (st->nu >= 0)
+			st->sign = 0;
 		else
-			fl.sign = '-';
-		if (fl.nu >= 0)
-			fl.nu2 = fl.nu;
+			st->sign = '-';
+		if (st->nu >= 0)
+			st->nu2 = st->nu;
 		else
-			fl.nu2 = -fl.nu;
+			st->nu2 = -st->nu;
 	}
-	if (fl.spe_c == 'u')
+	if (st->spe_c == 'u')
 	{
-		fl.nu2 = va_arg(args, unsigned int);
+		st->nu2 = va_arg(st->args, unsigned int);
 	}
-	fl.a = ft_ullitoa_base(fl.nu2, DIGITS);
-	print_flags(len, fl);
-	free(fl.a);
+	st->a = ft_ullitoa_base(st->nu2, DIGITS);
+	print_flags(st);
+	free(st->a);
 }
 
-void	print_spec_x(int *len, t_flags fl, va_list args)
+void	print_spec_x(t_printf *st)
 {
-	fl.nu2 = va_arg(args, unsigned int);
-	if (fl.spe_c == 'x')
-		fl.a = ft_ullitoa_base(fl.nu2, HEXALOW);
-	if (fl.spe_c == 'X')
-		fl.a = ft_ullitoa_base(fl.nu2, HEXAUPP);
-	print_flags(len, fl);
-	free(fl.a);
+	st->nu2 = va_arg(st->args, unsigned int);
+	if (st->spe_c == 'x')
+		st->a = ft_ullitoa_base(st->nu2, HEXALOW);
+	if (st->spe_c == 'X')
+		st->a = ft_ullitoa_base(st->nu2, HEXAUPP);
+	print_flags(st);
+	free(st->a);
 }

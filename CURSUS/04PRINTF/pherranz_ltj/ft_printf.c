@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:24 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/19 19:25:26 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/21 19:01:45 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,114 +14,103 @@
 
 #include "ft_printf.h"
 
-static void	treat_spec(va_list args, int *len, t_flags fl)
+static void	treat_spec(t_printf *st)
 {
-	if (fl.spe_c == '%')
-		print_spec_pct(len, fl);
-	if (fl.spe_c == 'c')
-		print_spec_c(len, fl, va_arg(args, int));
-	if (fl.spe_c == 's')
-		print_spec_s(len, fl, va_arg(args, char *));
-	if (fl.spe_c == 'p')
-		print_spec_p(len, fl, va_arg(args, unsigned long int));
-	if (fl.spe_c == 'i' || fl.spe_c == 'd' || fl.spe_c == 'u')
-		print_spec_i_d_u(len, fl, args);
-	if (fl.spe_c == 'x' || fl.spe_c == 'X')
-		print_spec_x(len, fl, args);
+	if (st->spe_c == '%')
+		print_spec_pct(st);
+	if (st->spe_c == 'c')
+		print_spec_c(st, va_arg(st->args, int));
+	if (st->spe_c == 's')
+		print_spec_s(st, va_arg(st->args, char *));
+	if (st->spe_c == 'p')
+		print_spec_p(st, va_arg(st->args, unsigned long int));
+	if (st->spe_c == 'i' || st->spe_c == 'd' || st->spe_c == 'u')
+		print_spec_i_d_u(st);
+	if (st->spe_c == 'x' || st->spe_c == 'X')
+		print_spec_x(st);
 }
 
-static t_flags	treat_star(va_list args, t_flags fl, int *j)
+static void	treat_star(t_printf *st)
 {
 	int	value;
 
-	(*j)++;
-	value = va_arg(args, int);
-	if (fl.point == 0)
+	st->str++;
+	value = va_arg(st->args, int);
+	if (st->point == 0)
 	{
-		fl.width = value;
+		st->width = value;
 		if (value <= 0)
-			fl.width = -value;
+			st->width = -value;
 		if (value <= 0)
-			fl.minus = 1;
+			st->minus = 1;
 	}
-	if (fl.point == 1)
+	if (st->point == 1)
 	{
 		if (value >= 0)
-			fl.precision = value;
+			st->precision = value;
 		else
-			fl.point = 0;
+			st->point = 0;
 	}
-	return (fl);
 }
 
-static t_flags	treat_flags(va_list args, t_flags fl)
+static void	treat_flags(t_printf *st)
 {
-	int		j;
-
-	j = 0;
-	while (ft_strchr_01(FLAGS, fl.set[j]))
+	while (ft_strchr_01(FLAGS, *st->setAux))
 	{
-		if (fl.set[j] == '0')
-			fl.pad_c = '0';
-		j++;
+		if (*st->setAux == '0')
+			st->pad_c = '0';
+		st->setAux++;
 	}
-	if (fl.set[j] == '*')
-		fl = treat_star(args, fl, &j);
-	while (fl.set[j] != '\0' && ft_strchr_01(DIGITS, fl.set[j]))
-		fl.width = 10 * fl.width + fl.set[j++] - '0';
-	if (fl.set[j] == '.')
+	if (*st->setAux == '*')
+		treat_star(st);
+	while (*st->setAux != '\0' && ft_strchr_01(DIGITS, *st->setAux))
+		st->width = 10 * st->width + *st->setAux - '0';
+	if (*st->setAux == '.')
 	{
-		fl.point = 1;
-		if (fl.set[++j] == '*')
-			fl = treat_star(args, fl, &j);
-		while (fl.set[j] != '\0' && ft_strchr_01(DIGITS, fl.set[j]))
-			fl.precision = 10 * fl.precision + fl.set[j++] - '0';
+		st->point = 1;
+		if (++*st->set == '*')
+			treat_star(st);
+		while (*st->setAux != '\0' && ft_strchr_01(DIGITS, *st->setAux))
+			st->precision = 10 * st->precision + *st->setAux - '0';
 	}
-	return (fl);
 }
 
-static void	get_fspecs(va_list args, const char *format, int *len, int *i)
+static void	initstruct(t_printf *st)
 {
-	t_flags	fl;
-	int		j;
-
-	j = 0;
-	while (ft_strchr_01(ALL_FL, format[*i]))
-		fl.set[j++] = format[(*i)++];
-	fl.set[j] = '\0';
-	if (ft_strchr_01(FSPECS, format[*i]))
+	while (ft_strchr_01(ALL_FLAGS, *st->str))
+		*st->set++ = *st->str++;
+	*st->set = '\0';
+	st->setAux = st->set;
+	if (ft_strchr_01(CONVERSIONS, *st->str++))
 	{
-		fl.spe_c = format[(*i)++];
-		fl.minus = ft_strchr_01(fl.set, '-');
-		fl.space = ft_strchr_01(fl.set, ' ');
-		fl.width = 0;
-		fl.point = 0;
-		fl.precision = 0;
-		fl.pad_c = ' ';
-		fl = treat_flags(args, fl);
-		treat_spec(args, len, fl);
+		st->spe_c = *st->str++;
+		st->minus = ft_strchr_01(st->set, '-');
+		st->width = 0;
+		st->point = 0;
+		st->precision = 0;
+		st->pad_c = ' ';
+		treat_flags(st);
+		treat_spec(st);
 	}
 }
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	args;
-	int		len;
-	int		i;
+	t_printf st;
 
-	va_start(args, format);
-	len = 0;
-	i = 0;
-	while (format[i] != '\0')
+	va_start(st.args, format);
+	st.lenstr = 0;
+	st.str = (char *)format;
+	while (*st.str != '\0')
 	{
-		if (format[i] != '%')
-			len += write(1, &format[i++], 1);
+		if (*st.str != '%')
+			st.lenstr += write(1, st.str++, 1);
 		else
 		{
-			i++;
-			get_fspecs(args, format, &len, &i);
+			st.str++;
+			initstruct(&st);
 		}
 	}
-	va_end(args);
-	return (len);
+	va_end(st.args);
+	return (st.lenstr);
 }

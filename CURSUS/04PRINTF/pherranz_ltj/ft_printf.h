@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:58 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/20 23:57:30 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:49:08 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 typedef struct	s_printf
 {
-	char					set[10];
-	char					setAux[10];
+	char					*set;
+	char					*setAux;
 	char					spe_c;
 	char					pad_c;
 	char					minus;
@@ -42,6 +42,7 @@ typedef struct	s_printf
 	char					*str;
 	size_t					lenstr;
 	va_list					args;
+	int						i;
 }				t_printf;
 
 typedef struct	s_ullitoa
@@ -54,16 +55,16 @@ typedef struct	s_ullitoa
 
 
 int				ft_printf(const char *str, ...);
-void			print_spec_c(int *len, t_printf fl, char c);
-void			print_spec_s(int *len, t_printf fl, char *s);
-void			print_spec_pct(int *len, t_printf fl);
-void			print_spec_i_d_u(int *len, t_printf fl, va_list args);
-void			print_spec_x(int *len, t_printf fl, va_list args);
-void			print_spec_p(int *len, t_printf fl, unsigned long int p);
-void			print_flags(int *len, t_printf fl);
+void			print_spec_pct(t_printf *st);
+void			print_spec_c(t_printf *st, char c);
+void			print_spec_s(t_printf *st, char *s);
+void			print_spec_i_d_u(t_printf *st);
+void			print_spec_x(t_printf *st);
+void			print_spec_p(t_printf *st, unsigned long int p);
+void			print_flags(t_printf *st);
 size_t			ft_strlen(const char *s);
 int				ft_strchr_01(char *s, char c);
-void			ft_putcstr_len(char *s, int *len, int size);
+void			ft_putcstr_len(char *s, t_printf *st, int size);
 char			*ft_ullitoa_base(unsigned long long int n, char *base);
 
 #endif

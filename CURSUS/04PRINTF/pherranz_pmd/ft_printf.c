@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 17:55:33 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/15 17:24:53 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:53:34 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 ** Función para comprobar el tipo (la letra después del %)
-** para saber qué tenmos que imprimir. Vamos derivando
+** para saber qué tenemos que imprimir. Vamos derivando
 ** el flujo a una función u otra dependiendo de qué tipo sea.
 */
 

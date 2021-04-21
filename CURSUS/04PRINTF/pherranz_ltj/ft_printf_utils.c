@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:47 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/19 19:25:48 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/21 18:48:19 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	ft_strchr_01(char *s, char c)
 	return (0);
 }
 
-void	ft_putcstr_len(char *s, int *len, int size)
+void	ft_putcstr_len(char *s, t_printf *st, int size)
 {
 	int	i;
 
@@ -47,33 +47,33 @@ void	ft_putcstr_len(char *s, int *len, int size)
 	{
 		i = 0;
 		while (s[i] && i < size)
-			*len += write(1, &s[i++], 1);
+			st->lenstr += write(1, &s[i++], 1);
 	}
 }
 
 char	*ft_ullitoa_base(unsigned long long int n, char *base)
 {
-	t_ullitoa	params;
+	t_ullitoa	p;
 
-	params.b_len = ft_strlen(base);
-	params.nbr = n;
-	params.size = 1;
-	n /= params.b_len;
+	p.baselen = ft_strlen(base);
+	p.nbr = n;
+	p.size = 1;
+	n /= p.baselen;
 	while (n)
 	{
-		params.size++;
-		n /= params.b_len;
+		p.size++;
+		n /= p.baselen;
 	}
-	params.a = (char *)malloc(params.size + 1);
-	if (!params.a)
+	p.a = (char *)malloc(p.size + 1);
+	if (!p.a)
 		return (0);
-	params.a[params.size--] = '\0';
-	while (params.nbr > 0)
+	p.a[p.size--] = '\0';
+	while (p.nbr > 0)
 	{
-		params.a[params.size--] = base[params.nbr % params.b_len];
-		params.nbr /= params.b_len;
+		p.a[p.size--] = base[p.nbr % p.baselen];
+		p.nbr /= p.baselen;
 	}
-	if (params.size == 0 && params.a[1] == '\0')
-		params.a[0] = '0';
-	return (params.a);
+	if (p.size == 0 && p.a[1] == '\0')
+		p.a[0] = '0';
+	return (p.a);
 }
