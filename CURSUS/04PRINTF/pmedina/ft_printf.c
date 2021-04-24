@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 14:12:10 by pmedina-          #+#    #+#             */
-/*   Updated: 2021/04/21 17:21:15 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/24 15:04:40 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	recorrestr(t_printf *j)
 			j->lenstr += write(1, j->str, 1);
 		j->str++;
 	}
-	va_end(j->args);
 }
 
 int		ft_printf(const char *s, ...)
