@@ -6,26 +6,26 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:44:01 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/24 23:14:59 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/24 22:55:47 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	print_spec_p(int *len, t_printf fl, unsigned long int p)
+void	printpointer(int *len, t_printf fl, unsigned long int p)
 {
 	fl.numstr = ft_ullitoa_base(p, HEXALOW);
 	print_flags(len, fl);
 	free(fl.numstr);
 }
 
-void	print_spec_i_d_u(int *len, t_printf fl, va_list args)
+void	printint(int *len, t_printf fl, va_list args)
 {
 	if (fl.cv == 'i' || fl.cv == 'd')
 	{
-		fl.numAux = va_arg(args, int);
-		fl.sign = (fl.numAux >= 0) ? 0 : '-';
-		fl.num = (fl.numAux >= 0) ? fl.numAux : -fl.numAux;
+		fl.numAux= va_arg(args, int);
+		fl.sign = (fl.numAux>= 0) ? 0 : '-';
+		fl.num = (fl.numAux>= 0) ? fl.numAux: -fl.numAux;
 	}
 	if (fl.cv == 'u')
 	{

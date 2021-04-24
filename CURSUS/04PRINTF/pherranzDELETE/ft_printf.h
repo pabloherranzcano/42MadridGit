@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:58 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/24 23:16:17 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/24 23:07:44 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,11 @@ typedef struct	s_ullitoa
 }				t_ullitoa;
 
 int				ft_printf(const char *str, ...);
-void			print_spec_c(int *len, t_printf fl, char c);
-void			print_spec_s(int *len, t_printf fl, char *s);
-void			print_spec_pct(int *len, t_printf fl);
-void			print_spec_i_d_u(int *len, t_printf fl, va_list args);
-void			print_spec_x(int *len, t_printf fl, va_list args);
-void			print_spec_p(int *len, t_printf fl, unsigned long int p);
+void			printchar(int *len, t_printf fl, char c);
+void			printstring(int *len, t_printf fl, char *s);
+void			printint(int *len, t_printf fl, va_list args);
+void			printhex(int *len, t_printf fl, va_list args);
+void			printpointer(int *len, t_printf fl, unsigned long int p);
 void			print_flags(int *len, t_printf fl);
 size_t			ft_strlen(const char *s);
 int				ft_strchr_01(char *s, char c);

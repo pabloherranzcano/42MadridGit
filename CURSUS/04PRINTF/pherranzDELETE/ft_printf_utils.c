@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/06 14:44:41 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/24 23:14:01 by pherranz         ###   ########.fr       */
+/*   Created: 2021/03/12 16:23:31 by ltejedor          #+#    #+#             */
+/*   Updated: 2021/04/24 22:57:58 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 size_t	ft_strlen(const char *s)
 {
 	size_t l;

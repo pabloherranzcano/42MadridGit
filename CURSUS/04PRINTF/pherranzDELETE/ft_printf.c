@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 14:48:50 by ltejedor          #+#    #+#             */
-/*   Updated: 2021/04/24 23:13:37 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/24 23:05:05 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static void		treat_cv(va_list args, int *len, t_printf fl)
 {
 	if (fl.cv == '%')
-		print_spec_pct(len, fl);
+		printchar(len, fl, '%');
 	if (fl.cv == 'c')
-		print_spec_c(len, fl, va_arg(args, int));
+		printchar(len, fl, va_arg(args, int));
 	if (fl.cv == 's')
-		print_spec_s(len, fl, va_arg(args, char *));
+		printstring(len, fl, va_arg(args, char *));
 	if (fl.cv == 'p')
-		print_spec_p(len, fl, va_arg(args, unsigned long int));
+		printpointer(len, fl, va_arg(args, unsigned long int));
 	if (fl.cv == 'i' || fl.cv == 'd' || fl.cv == 'u')
-		print_spec_i_d_u(len, fl, args);
+		printint(len, fl, args);
 	if (fl.cv == 'x' || fl.cv == 'X')
-		print_spec_x(len, fl, args);
+		printhex(len, fl, args);
 }
 
 static t_printf	treat_star(va_list args, t_printf fl, int *j)
@@ -77,7 +77,7 @@ static t_printf	treat_flags(va_list args, t_printf fl)
 
 static void		get_fspecs(va_list args, const char *format, int *len, int *i)
 {
-	t_printf fl;
+	t_printf	fl;
 	int		j;
 
 	j = 0;
