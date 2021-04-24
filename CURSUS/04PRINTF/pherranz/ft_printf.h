@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/19 19:25:58 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/24 16:20:32 by pherranz         ###   ########.fr       */
+/*   Created: 2021/04/24 20:18:06 by pherranz          #+#    #+#             */
+/*   Updated: 2021/04/24 20:18:28 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define HEXALOW		"0123456789abcdef"
 # define HEXAUPP		"0123456789ABCDEF"
 
-typedef struct	s_printf
+typedef struct s_printf
 {
 	char					flagset[10];
 	char					cv;
@@ -45,14 +45,13 @@ typedef struct	s_printf
 	va_list					args;
 }				t_printf;
 
-typedef struct	s_ullitoa
+typedef struct s_ullitoa
 {
 	char					*numstr;
 	unsigned long long int	nbr;
 	size_t					size;
 	int						baselen;
 }				t_ullitoa;
-
 
 int				ft_printf(const char *str, ...);
 void			printchar(int *len, t_printf st, char c);

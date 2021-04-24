@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:24 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/24 16:06:16 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/24 20:17:25 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static t_printf	treat_flags(va_list args, t_printf st)
 static void	initstruct(va_list args, const char *format, int *len, int *i)
 {
 	t_printf	st;
-	int		j;
+	int			j;
 
 	j = 0;
 	while (ft_strchr_01(ALL_FLAGS, format[*i]))
@@ -100,8 +100,8 @@ static void	initstruct(va_list args, const char *format, int *len, int *i)
 
 int	ft_printf(const char *format, ...)
 {
-	t_printf st;
-	int		i;
+	t_printf	st;
+	int			i;
 
 	st.str = (char *)format;
 	st.lenstr = 0;
