@@ -6,17 +6,17 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:42 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/24 23:24:22 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:49:24 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	printpointer(int *len, t_printf st, unsigned long int p)
+void	printpointer(int *len, t_printf *st, unsigned long int p)
 {
-	st.numstr = ft_ullitoa_base(p, HEXALOW);
-	print_flags(len, st);
-	free(st.numstr);
+	st->numstr = ft_ullitoa_base(p, HEXALOW);
+	print_flags(len, *st);
+	free(st->numstr);
 }
 
 void	printint(int *len, t_printf st, va_list args)

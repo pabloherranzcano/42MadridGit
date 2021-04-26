@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/19 19:25:24 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/24 23:24:29 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:05:42 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,25 +76,24 @@ static t_printf	treat_flags(va_list args, t_printf st)
 	return (st);
 }
 
-static void	initstruct(va_list args, const char *format, int *len, int *i)
+static void	initstruct(t_printf *st, va_list args, const char *format, int *len, int *i)
 {
-	t_printf	st;
 	int			j;
 
 	j = 0;
 	while (ft_strchr_01(ALL_FLAGS, format[*i]))
-		st.flagset[j++] = format[(*i)++];
-	st.flagset[j] = '\0';
+		st->flagset[j++] = format[(*i)++];
+	st->flagset[j] = '\0';
 	if (ft_strchr_01(CONVERSIONS, format[*i]))
 	{
-		st.cv = format[(*i)++];
-		st.minus = ft_strchr_01(st.flagset, '-');
-		st.width = 0;
-		st.point = 0;
-		st.precision = 0;
-		st.pad = ' ';
-		st = treat_flags(args, st);
-		treat_cv(args, len, st);
+		st->cv = format[(*i)++];
+		st->minus = ft_strchr_01(st->flagset, '-');
+		st->width = 0;
+		st->point = 0;
+		st->precision = 0;
+		st->pad = ' ';
+		*st = treat_flags(args, *st);
+		treat_cv(args, len, *st);
 	}
 }
 
@@ -114,7 +113,7 @@ int	ft_printf(const char *format, ...)
 		else
 		{
 			i++;
-			initstruct(st.args, st.str, &st.lenstr, &i);
+			initstruct(&st, st.args, st.str, &st.lenstr, &i);
 		}
 	}
 	va_end(st.args);

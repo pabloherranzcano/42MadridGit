@@ -1,0 +1,198 @@
+WARNING: The return values reported here may be bugged on some systems.
+          See https://github.com/gavinfielder/pft/issues/11
+          Run in non-fork mode (-X) to ensure accurate return value
+          reporting, set IGNORE_RETURN_VALUE=1 in options-config.ini,
+          or run test_pipes.sh to see if your system has this bug.
+          This bug does not affect the pass/fail result of a test, nor
+          the function output--only the reported return value.
+
+
+Test 429 (p_void) : FAILED.
+    First line of code: {return test("%.p", NULL);}
+      expected return value : 2
+      your return value     : 3
+      expected output : "0x"
+      your output     : "0x0"
+      expected (nonprintable as hex) : "0x"
+      actual   (nonprintable as hex) : "0x0"
+
+Test 430 (p_void_width_fit) : FAILED.
+    First line of code: {return test("%5.p", NULL);}
+      expected return value : 5
+      your return value     : 5
+      expected output : "   0x"
+      your output     : "  0x0"
+      expected (nonprintable as hex) : "   0x"
+      actual   (nonprintable as hex) : "  0x0"
+
+Test 431 (p_void_width_nofit) : FAILED.
+    First line of code: {return test("%2.p", NULL);}
+      expected return value : 2
+      your return value     : 3
+      expected output : "0x"
+      your output     : "0x0"
+      expected (nonprintable as hex) : "0x"
+      actual   (nonprintable as hex) : "0x0"
+
+Test 435 (p_ftfc_zero_prec0_undefbehav) : FAILED.
+    First line of code: {return test("%.0p", 0);}
+      expected return value : 2
+      your return value     : 3
+      expected output : "0x"
+      your output     : "0x0"
+      expected (nonprintable as hex) : "0x"
+      actual   (nonprintable as hex) : "0x0"
+
+Test 722 (moul_notmandatory_star_1) : FAILED.
+    First line of code: {return test("%%-*.3s LYDI == |%-*.3s|
+", 5, "LYDI");}
+    SEGFAULT
+
+Test 723 (moul_notmandatory_star_3) : FAILED.
+    First line of code: {return test("%%*i 42 == |%*i|
+", 5, 42);}
+      expected return value : 19
+      your return value     : 19
+      expected output : "%*i 42 == |   42|
+"
+      your output     : "%*i 42 == |    5|
+"
+      expected (nonprintable as hex) : "%*i 42 == |   42|\x0a"
+      actual   (nonprintable as hex) : "%*i 42 == |    5|\x0a"
+
+Test 724 (moul_notmandatory_star_4) : FAILED.
+    First line of code: {return test("%%*i 42 == |%*i|
+", 3, 42);}
+      expected return value : 17
+      your return value     : 17
+      expected output : "%*i 42 == | 42|
+"
+      your output     : "%*i 42 == |  3|
+"
+      expected (nonprintable as hex) : "%*i 42 == | 42|\x0a"
+      actual   (nonprintable as hex) : "%*i 42 == |  3|\x0a"
+
+Test 725 (moul_notmandatory_star_5) : FAILED.
+    First line of code: {return test("%%*i 42 == |%*i|
+", 2, 42);}
+      expected return value : 16
+      your return value     : 16
+      expected output : "%*i 42 == |42|
+"
+      your output     : "%*i 42 == | 2|
+"
+      expected (nonprintable as hex) : "%*i 42 == |42|\x0a"
+      actual   (nonprintable as hex) : "%*i 42 == | 2|\x0a"
+
+Test 726 (new2019_star_1) : FAILED.
+    First line of code: {return test("%*s", 32, "abc");}
+    SEGFAULT
+
+Test 727 (new2019_star_2) : FAILED.
+    First line of code: {return test("%-*s", 32, "abc");}
+    SEGFAULT
+
+Test 728 (new2019_star_3) : FAILED.
+    First line of code: {return test("%*s", 3, "hello");}
+    SEGFAULT
+
+Test 729 (new2019_star_4) : FAILED.
+    First line of code: {return test("%.*s", 3, "hello");}
+    SEGFAULT
+
+Test 731 (new2019_star_6) : FAILED.
+    First line of code: {return test("%-*.*s", 7, 3, "yolo");}
+    SEGFAULT
+
+Test 732 (new2019_star_7) : FAILED.
+    First line of code: {return test("%*i", 4, 94827);}
+      expected return value : 5
+      your return value     : 4
+      expected output : "94827"
+      your output     : "   4"
+      expected (nonprintable as hex) : "94827"
+      actual   (nonprintable as hex) : "   4"
+
+Test 733 (new2019_star_8) : FAILED.
+    First line of code: {return test("%*i", 14, 94827);}
+      expected return value : 15
+      your return value     : 15
+      expected output : "         94827"
+      your output     : "            14"
+      expected (nonprintable as hex) : "         94827"
+      actual   (nonprintable as hex) : "            14"
+
+Test 734 (new2019_star_9) : FAILED.
+    First line of code: {return test("%.*i", 6, -3);}
+      expected return value : 7
+      your return value     : 6
+      expected output : "-000003"
+      your output     : "000006"
+      expected (nonprintable as hex) : "-000003"
+      actual   (nonprintable as hex) : "000006"
+
+Test 735 (new2019_star_10) : FAILED.
+    First line of code: {return test("%0*i", 7, -54);}
+      expected return value : 7
+      your return value     : 7
+      expected output : "-000054"
+      your output     : "0000007"
+      expected (nonprintable as hex) : "-000054"
+      actual   (nonprintable as hex) : "0000007"
+
+Test 736 (new2019_negstar_1) : FAILED.
+    First line of code: {return test("%*s", -32, "abc");}
+    SEGFAULT
+
+Test 737 (new2019_negstar_2) : FAILED.
+    First line of code: {return test("%-*s", -32, "abc");}
+    SEGFAULT
+
+Test 738 (new2019_negstar_3) : FAILED.
+    First line of code: {return test("%*s", -3, "hello");}
+    SEGFAULT
+
+Test 739 (new2019_negstar_4) : FAILED.
+    First line of code: {return test("%.*s", -3, "hello");}
+    SEGFAULT
+
+Test 740 (new2019_negstar_5) : FAILED.
+    First line of code: {return test("%-*.*s", -7, -3, "yolo");}
+    SEGFAULT
+
+Test 741 (new2019_negstar_6) : FAILED.
+    First line of code: {return test("%*i", -4, 94827);}
+      expected return value : 5
+      your return value     : 4
+      expected output : "94827"
+      your output     : "-4  "
+      expected (nonprintable as hex) : "94827"
+      actual   (nonprintable as hex) : "-4  "
+
+Test 742 (new2019_negstar_7) : FAILED.
+    First line of code: {return test("%*i", -14, 94827);}
+      expected return value : 15
+      your return value     : 15
+      expected output : "94827         "
+      your output     : "-14           "
+      expected (nonprintable as hex) : "94827         "
+      actual   (nonprintable as hex) : "-14           "
+
+Test 743 (new2019_negstar_8) : FAILED.
+    First line of code: {return test("%.*i", -6, -3);}
+      expected return value : 2
+      your return value     : 2
+      expected output : "-3"
+      your output     : "-6"
+      expected (nonprintable as hex) : "-3"
+      actual   (nonprintable as hex) : "-6"
+
+Test 744 (new2019_negstar_9) : FAILED.
+    First line of code: {return test("%0*i", -7, -54);}
+      expected return value : 7
+      your return value     : 7
+      expected output : "-54    "
+      your output     : "-7     "
+      expected (nonprintable as hex) : "-54    "
+      actual   (nonprintable as hex) : "-7     "
+

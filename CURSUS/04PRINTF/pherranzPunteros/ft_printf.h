@@ -6,7 +6,7 @@
 /*   By: pherranz <pherranz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:18:06 by pherranz          #+#    #+#             */
-/*   Updated: 2021/04/24 23:24:37 by pherranz         ###   ########.fr       */
+/*   Updated: 2021/04/25 13:46:43 by pherranz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void			printchar(int *len, t_printf st, char c);
 void			printstring(int *len, t_printf st, char *s);
 void			printint(int *len, t_printf st, va_list args);
 void			printhexu(int *len, t_printf st, va_list args);
-void			printpointer(int *len, t_printf st, unsigned long int p);
+void			printpointer(int *len, t_printf *st, unsigned long int p);
 void			print_flags(int *len, t_printf st);
 size_t			ft_strlen(const char *s);
 int				ft_strchr_01(char *s, char c);
